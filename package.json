@@ -1,0 +1,38 @@
+{
+  "name": "@randajan/jet-base",
+  "version": "1.0.0",
+  "description": "Ecosystem of types and related usefull tools.",
+  "repository": "randajan/jet-base",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "scripts": {
+    "start": "set NODE_ENV=dev&& node ./index.js",
+    "build": "set NODE_ENV=prod&& node ./index.js"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@randajan/simple-lib": "^1.1.1"
+  },
+  "peerDependencies": {
+    "@randajan/jet-core": "^1.0.5"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "types",
+    "tool"
+  ],
+  "homepage": "https://github.com/randajan/jet-base",
+  "bugs": {
+    "url": "https://github.com/randajan/jet-base/issues"
+  },
+  "author": {
+    "name": "Jan Randa",
+    "email": "jnranda@gmail.com",
+    "url": "https://www.linkedin.com/in/randajan/"
+  }
+}

@@ -1,0 +1,1 @@
+export default _=>console.log("helloworld");
