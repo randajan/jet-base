@@ -13,10 +13,11 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "@randajan/simple-lib": "^1.1.1"
+    "@randajan/simple-lib": "^1.1.1",
+    "crypto-js": "^4.1.1"
   },
   "peerDependencies": {
-    "@randajan/jet-core": "^1.0.5"
+    "@randajan/jet-core": "^2.0.2"
   },
   "files": [
     "dist",

@@ -1,1 +1,3 @@
-export default _=>console.log("helloworld");
+import Base from "./Base.js";
+
+export default Base;

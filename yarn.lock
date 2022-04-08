@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@randajan/jet-core@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@randajan/jet-core/-/jet-core-1.0.5.tgz#3390e7ed667965ea956a595fe29fc9fdd5f50512"
-  integrity sha512-TtcwB5IkunKo9LNZlA0p6+G1qylIZKaGZItkYYA4zVvFB+pwWtb0B2PUi4ut/fnweIv24p1lXZOwPlgYq4ak+w==
+"@randajan/jet-core@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@randajan/jet-core/-/jet-core-2.0.2.tgz#a037004f5901b804b1dffdf4fe60f7eeb38567f7"
+  integrity sha512-tLfHlvRjTjkj7qPsRX70aAHFTol2wzBNWZYrTeSv3PplYi4gYXqcmqtC0376U+fLZ2tzVHbIFStfTNdMNqNyaw==
 
 "@randajan/simple-lib@^1.1.1":
   version "1.1.1"
@@ -262,6 +262,11 @@ cors@latest:
   dependencies:
     object-assign "^4"
     vary "^1"
+
+crypto-js@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
+  integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
   version "2.6.9"
