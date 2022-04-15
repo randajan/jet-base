@@ -130,32 +130,31 @@ class Base {
         if (!sp) { this.throw("set", "first argument 'path' missing"); }
         const _p = priv(this), { body, flat, fit, eye } = _p;
 
-        const reflat = jet.map(flat, (v, p)=>p.startsWith(sp) ? undefined : v); // clone flatmap without actual path prefix
-        const set = (v, vk)=>{ 
-            console.log(v, vk, flat[vk]); //place for fitting
-            return reflat[vk] = v;
+        const audit = new Set();
+        _p.flat = jet.forEach(flat, (v, p)=>{
+            audit.add(p); if (!p.startsWith(sp)) { return v; }
+        }); // clone flatmap without actual path prefix
+        
+        const set = (v, p)=>{
+            audit.add(p);
+            console.log(v, p, flat[p]); //fit every value
+            return _p.flat[p] = v;
         }
         const deep = (v, vk)=>set(jet.map(v, set, deep, vk), vk);
-
-        const put = (obj, arrayPath, val, lvl=0)=>{
-            const key = arrayPath[lvl];
-            if (!obj) { obj = Str.jet.isNumeric(key) ? [] : {}; }
-            if (lvl >= arrayPath.length-1) { return jet.map({[sp]:val}, set, deep)[sp]; }
-            obj[key] = put(obj[key], arrayPath, val, lvl+1);
-            return obj;
-        }
-
-        put(_p.body, ap, value);
-        _p.flat = reflat;
+        const dummy = jet.map({[sp]:value}, set, deep)[sp];
+        console.log("pipe!");
+        _p.body = jet.digIn(body, ap, dummy, true, (next, parent, path, dir)=>set(next(parent), dir)); //fit path
 
         let changes = "";
-        jet.forEach(reflat, (v, vk)=>(!jet.isMapable(v) && v !== flat[vk]) ? changes+=" ^"+vk : undefined);
+        audit.forEach((v, vk)=>(!jet.isMapable(v) && v !== flat[vk]) ? changes+=" ^"+vk : undefined);
 
         setTimeout(_=>{
             jet.forEach(eye, (v, vk)=>changes.includes(" ^"+vk) ? v() : undefined);
         });
+
+        //console.log(flat, _p.flat);
  
-        return !!changes;
+        return changes;
 
         // const pipe = path.split(".")[0];
         // const data = {[pipe]:this._data[pipe]};

@@ -11,13 +11,12 @@
     "build": "set NODE_ENV=prod&& node ./index.js"
   },
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
     "@randajan/simple-lib": "^1.1.1",
     "crypto-js": "^4.1.1"
   },
   "peerDependencies": {
-    "@randajan/jet-core": "^2.0.2"
+    "@randajan/jet-core": "^2.1.2"
   },
   "files": [
     "dist",
