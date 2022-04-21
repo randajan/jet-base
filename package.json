@@ -6,21 +6,24 @@
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "scripts": {
     "start": "set NODE_ENV=dev&& node ./index.js",
     "build": "set NODE_ENV=prod&& node ./index.js"
   },
   "license": "MIT",
   "devDependencies": {
-    "@randajan/simple-lib": "^1.1.1",
-    "crypto-js": "^4.1.1"
+    "@randajan/simple-lib": "^1.2.1"
   },
   "peerDependencies": {
-    "@randajan/jet-core": "^2.1.2"
+    "@randajan/jet-core": "^2.1.7"
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "keywords": [
     "types",
@@ -34,5 +37,6 @@
     "name": "Jan Randa",
     "email": "jnranda@gmail.com",
     "url": "https://www.linkedin.com/in/randajan/"
-  }
+  },
+  "dependencies": {}
 }
