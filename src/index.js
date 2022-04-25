@@ -33,7 +33,7 @@ class Base {
     remove(path) { return _.set(this, path); }
     pull(path) { const value = this.get(path); this.remove(path); return value; }
     
-    watch(path, fce) { return addWatch(this, path, fce); }
+    watch(path, fce, initRun=false) { return addWatch(this, path, fce, initRun); }
     fit(path, fce) { return addFit(this, path, fce); }
 
     fitTo(path, type, ...args) { return addFit(this, path, (next, v, f)=>jet.to(type, next(v, f), ...args)); }

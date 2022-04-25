@@ -21,9 +21,11 @@ const filterChanges = (path, changes)=>{
     return result;
 }
 
-export const addWatch = (base, path, fce)=>{
+export const addWatch = (base, path, fce, initRun=false)=>{
     [path, fce] = formatDutyArgs(path, fce);
-    return addDuty(use(base), "watches", path, cngs=>{ fce(p=>base.get([path, p]), _=>filterChanges(path, cngs)); });
+    const get = p=>base.get([path, p]);
+    if (initRun) { setTimeout(_=>fce(get, _=>[])); }
+    return addDuty(use(base), "watches", path, cngs=>{ fce(get, _=>filterChanges(path, cngs)); });
 }
 
 export const addFit = (base, path, fce)=>{
