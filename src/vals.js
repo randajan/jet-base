@@ -60,15 +60,15 @@ export const set = (base, path, value)=>{
     for (let i=rawPaths.length-1; i>=0; i--) { //fit changes
         const p = rawPaths[i];
         if (path === p) {// SET
-            console.log(p, "set");
+            //console.log(p, "set");
             put(p, fit(fits, p, flatIn, flat), flatIn, flat, true);
         } 
         else if (path.startsWith(p)) {// MERGE
-            console.log(p, "merge");
+            //console.log(p, "merge");
             put(p, fit(fits, p, flatIn, flat), flatIn, flat, true);
         } 
         else if (p.startsWith(path)) {// OVERWRITE
-            console.log(p, "overwrite");
+            //console.log(p, "overwrite");
             put(p, fit(fits, p, flatIn, flat), flatIn, flatIn);
         }
     }
