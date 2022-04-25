@@ -19,6 +19,7 @@ const forEach = (value, callback, path)=>{
 
 const deflate = (paths, path, value)=>{
     const flat = {[path]:value};
+
     let p = path;
     do {
         if (paths.has(p)) { break }
@@ -35,7 +36,7 @@ const deflate = (paths, path, value)=>{
 
 const prepareParent = (key, parent, img, copy=false)=>{
     if (parent) { return parent; }
-    if (!img) { return String.jet.isNumeric(key) ? [] : {} }
+    if (!img || !jet.isMapable(img)) { return String.jet.isNumeric(key) ? [] : {} }
     return copy ? jet.copy(img, true, false) : jet.create(jet(img, false));
 }
 
@@ -59,12 +60,15 @@ export const set = (base, path, value)=>{
     for (let i=rawPaths.length-1; i>=0; i--) { //fit changes
         const p = rawPaths[i];
         if (path === p) {// SET
+            console.log(p, "set");
             put(p, fit(fits, p, flatIn, flat), flatIn, flat, true);
         } 
         else if (path.startsWith(p)) {// MERGE
+            console.log(p, "merge");
             put(p, fit(fits, p, flatIn, flat), flatIn, flat, true);
         } 
         else if (p.startsWith(path)) {// OVERWRITE
+            console.log(p, "overwrite");
             put(p, fit(fits, p, flatIn, flat), flatIn, flatIn);
         }
     }
@@ -75,6 +79,7 @@ export const set = (base, path, value)=>{
     const flatOut = _p.flat = {"":output};
     const cngs = _p.changes = [];
 
+    pathsOut.add("");
     forEach(output, (v, p, isMapable)=>{ //detect updates
         if (!isMapable && v !== flat[p]) { cngs.push(p); }
         pathsOut.add(p);
