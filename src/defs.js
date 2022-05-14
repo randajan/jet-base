@@ -26,8 +26,3 @@ export const config = (base, ...args)=>{
     if (priv.config) { base.throw("config", "can be called just once"); }
     priv.config = args;
 }
-
-export const init = (base)=>{
-    use(base).initialized = true;
-    return base;
-}

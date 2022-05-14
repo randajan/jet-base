@@ -1,6 +1,6 @@
 
 import jet from "@randajan/jet-core";
-import { use, register } from "./defs.js";
+import { use, register, config } from "./defs.js";
 import { addWatch, addFit } from "./duty.js";
 import * as _ from "./vals.js";
 
