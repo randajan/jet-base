@@ -20,10 +20,14 @@ yarn add @randajan/jet-base
 
 ### Init
 ```js
-import Base from "@randajan/jet-base";
+import { BaseSync } from "@randajan/jet-base";
 
-const base = new Base(true); //first argument = debug mode on/off
+const base = new BaseSync();
+base.init(true) // initialize base (first argument = debug on/off)
 ```
+
+there is also possibility to use 'base.config(true)' instead. Base will be initialized with arguments passed to config function when it will be necessarily
+
 
 ### Set
 function that simply assign values. For rewrite whole structure it can be used with object as first argument:
@@ -72,6 +76,15 @@ base.watch("a", (get, changes)=>console.log(get()));
 ```
 after any change at desired path will be called this function. Passing two arguments. Both are functions. get() will return value at same path and changes() will return list of sub changes;
 
+### Async
+async version working pretty same
+
+```js
+import { BaseAsync } from "@randajan/jet-base";
+
+const base = new BaseAsync(); 
+base.config(true) // config base for later use (first argument = debug on/off)
+```
 
 ## License
 

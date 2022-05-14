@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@randajan/jet-core@^3.0.6":
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/@randajan/jet-core/-/jet-core-3.0.6.tgz#f9bf8be58e3241a653af2759743596e072dba2bb"
-  integrity sha512-8tLY9b6ZKQvQWE+uCLUiiZXQyF89eT5ksEWpf5KrWdOueQMRY9gYFj0DvqmZFPgO+dnKEnS++GBiIuLwbtDQ0g==
+"@randajan/jet-core@^3.0.8":
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/@randajan/jet-core/-/jet-core-3.0.8.tgz#d404b890e085dda1313f8d87a75550ed7a576662"
+  integrity sha512-Cxtz6qvXTzA4M7ZslKqhrmHYbRTrb4ZZIdyseD4OAnFsGSd72PcGiBUfKmtJNNUBiBetaQ2VVxBfPFMfQm2B6g==
 
 "@randajan/simple-lib@^1.2.1":
   version "1.2.1"

@@ -1,8 +1,15 @@
 import jet from "@randajan/jet-core";
-import Base from "../../dist/index.js";
+import { BaseSync } from "../../dist/index.js";
+import screen from "./screen.js";
 
 
 window.jet = jet;
-window.base = new Base(true);
+
+
+
+window.baseScreen = screen;
+
+
+window.base = new BaseSync(true);
 
 
