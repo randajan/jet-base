@@ -51,7 +51,7 @@ export const init = (base, options)=>{
         return base;
     };
 
-    return _p.initialization = _p.onInit(_p.options = (options || _p.options), closure);
+    return _p.initialization = _p.onInit(_p.options = Object.jet.to(options || _p.options), closure);
 }
 
 

@@ -9,8 +9,7 @@ window.jet = jet;
 
 window.baseScreen = screen;
 
-window.base = new BaseAsync(async (base)=>{
-
+window.base = new BaseAsync(async (base, options)=>{
     await new Promise((res, rej)=>{
         setTimeout(_=>{
             base.set({test:"test"});
