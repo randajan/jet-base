@@ -54,7 +54,11 @@ class Base {
     }
 
     remove(path) { return _.set(this, path); }
-    pull(path) { const value = this.get(path); _.set(this, path); return value; }
+    pull(path) {
+        const v = _.get(this, path);
+        _.set(this, path);
+        return v != null ? jet.copy(v, true) : def;
+    }
     
     watch(path, fce, initRun=false) { return addWatch(this, path, fce, initRun); }
 
