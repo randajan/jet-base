@@ -1,61 +1,70 @@
-import Base from "./base.js";
+import Base from "./Base.js";
+import { autoInit } from "./defs.js";
 
 class BaseAsync extends Base {
 
+    constructor(onInit) {
+        super(async (image, options, closure)=>{
+            if (!jet.isRunnable(onInit)) { return closure(true); }
+            try { await onInit(image, options); } catch (e) { return closure(false, e); }
+            return closure(true);
+        });
+    }
+
     async is(path, value) {
-        await this.autoInit();
+        await autoInit(this);
         return super.is(path, value);
     }
     async isType(path, type, strict=true) {
-        await this.autoInit();
+        await autoInit(this, true);
         return super.isType(path, type, strict);
     }
     async isFull(path) {
-        await this.autoInit();
+        await autoInit(this, true);
         return super.isFull(path);
     }
     async get(path, def) {
-        await this.autoInit();
+        await autoInit(this, true);
         return super.get(path, def);
     }
     async getType(path, strict=true) {
-        await this.autoInit();
+        await autoInit(this, true);
         return super.getType(path, strict);
     }
     async set(path, value) {
-        await this.autoInit();
+        await autoInit(this);
         return super.set(path, value);
     }
     async remove(path) {
-        await this.autoInit();
+        await autoInit(this);
         return super.remove(path);
     }
     async pull(path) {
-        await this.autoInit();
+        await autoInit(this);
         return super.pull(path);
     }
     async watch(path, fce, initRun=false) {
-        await this.autoInit();
+        await autoInit(this, true);
         return super.watch(path, fce, initRun);
     }
     async fit(path, fce) {
-        await this.autoInit();
+        await autoInit(this);
         return super.fit(path, fce);
     }
     async fitTo(path, type, ...args) {
-        await this.autoInit();
+        await autoInit(this);
         return super.fitTo(path, type, ...args);
     }
     async fitType(path, type, strict=true) {
-        await this.autoInit();
+        await autoInit(this);
         return super.fitType(path, type, strict);
     }
     async setDefault(path, value, fullDetect=true) {
-        await this.autoInit();
+        await autoInit(this);
         return super.setDefault(path, value, fullDetect);
     }
     async setLock(path, value) {
-        await this.autoInit();
+        await autoInit(this);
         return super.setLock(path, value);
     }
 }

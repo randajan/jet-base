@@ -1,26 +1,31 @@
 
 import jet from "@randajan/jet-core";
-import { use, register, config } from "./defs.js";
+import { use, register, config, init } from "./defs.js";
 import { addWatch, addFit } from "./duty.js";
 import * as _ from "./vals.js";
 
 class Base {
 
-    constructor() {
-        const priv = register(this);
-        const init = this.init.bind(this);
+    constructor(onInit) {
+        const _p = register(this);
 
-        Object.defineProperties(this, {
-            state:{enumerable:true, get:_=>priv.state},
-            debug:{enumerable:true, get:_=>priv.debug},
-            init:{value:(...args)=>{
-                if (priv.state !== "pending") { this.throw("init", `state must be 'pending' insted is '${priv.state}'`); }
-                priv.state = "initializing";
-                if (!priv.config) { return init(...args); }
-                if (args.length) { this.throw("init", "arguments was predefined with config()"); }
-                return init(...priv.config);
-            }}
-        });
+        const props = {
+            error:{enumerable:true, get:_=>_p.error},
+            state:{enumerable:true, get:_=>_p.state},
+            stateCode:{enumerable:true, get:_=>_p.stateCode},
+            debug:{enumerable:true, get:_=>_p.debug, set:v=>_p.debug = Boolean.jet.to(debug)},
+        }
+
+        Object.defineProperties(this, props);
+
+        _p.onInit = (options, closure)=>{
+            const image = Object.defineProperties({}, props);
+            for (const i in Object.getOwnPropertyDescriptors(Base.prototype)) {
+                if (i !== "constructor") { image[i] = Base.prototype[i].bind(this); }
+            }
+
+            return onInit(image, options, closure);
+        }
         
     }
 
@@ -30,21 +35,8 @@ class Base {
         throw `jet-base${method ? ` ${method}(...)` : ""}${path ? ` path '${path}'` : ""} ${msg}`;
     }
 
-    config(...args) {
-        config(this, ...args);
-        return this;
-    }
-
-    init(debug=false) {
-        const priv = use(this);
-        priv.debug = Boolean.jet.to(debug);
-        priv.state = "ready";
-        return this;
-    }
-
-    autoInit() {
-        if (this.state === "pending") { return this.init(); }
-    }
+    config(options) { return config(this, options); }
+    init(options) { return init(this, options); }
 
     is(path, value) { return _.get(this, path) === value; }
     isType(path, type, strict=true) { return jet.is(type, _.get(this, path), strict); }
@@ -62,9 +54,10 @@ class Base {
     }
 
     remove(path) { return _.set(this, path); }
-    pull(path) { const value = this.get(path); this.remove(path); return value; }
+    pull(path) { const value = this.get(path); _.set(this, path); return value; }
     
     watch(path, fce, initRun=false) { return addWatch(this, path, fce, initRun); }
+
     fit(path, fce) { return addFit(this, path, fce); }
 
     fitTo(path, type, ...args) { return addFit(this, path, (next, v, f)=>jet.to(type, next(v, f), ...args)); }

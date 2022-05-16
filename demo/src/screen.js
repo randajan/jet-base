@@ -9,34 +9,32 @@ const def = {
 class Screen extends BaseAsync {
 
     constructor() {
-        super();
+        super(async (options, closure)=>{
+            const { widths, heights } = Object.jet.to(options);
+    
+            const check = {
+                width:Array.jet.tap(widths, def.width).sort((a,b)=>a-b),
+                height:Array.jet.tap(heights, def.height).sort((a,b)=>a-b)
+            }    
+    
+            window.addEventListener("resize", _=>this.set());
+    
+            await this.fit(_=>{
+                const r = {};
+                for (let k in check) {
+                    const d = check[k], v = this[k];
+                    for (let i in d) { r[d[i]+k[0]] = v >= d[i]; };
+                }
+                return r;
+            });
+    
+            return closure();
+        });
 
         Object.defineProperties(this, {
             width:{get:_=>Math.max(document.documentElement.clientWidth, window.innerWidth)},
             height:{get:_=>Math.max(document.documentElement.clientHeight, window.innerHeight)}
         });
-    }
-
-    async init(options, debug=false) {
-        const { widths, heights } = Object.jet.to(options);
-
-        const check = {
-            width:Array.jet.tap(widths, def.width).sort((a,b)=>a-b),
-            height:Array.jet.tap(heights, def.height).sort((a,b)=>a-b)
-        }    
-
-        window.addEventListener("resize", _=>this.set());
-
-        await this.fit(_=>{
-            const r = {};
-            for (let k in check) {
-                const d = check[k], v = this[k];
-                for (let i in d) { r[d[i]+k[0]] = v >= d[i]; };
-            }
-            return r;
-        });
-
-        return super.init(debug);
     }
 
 }

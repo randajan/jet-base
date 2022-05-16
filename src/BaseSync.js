@@ -1,61 +1,70 @@
-import Base from "./base.js";
+import Base from "./Base.js";
+import { autoInit } from "./defs.js";
 
 class BaseSync extends Base {
 
+    constructor(onInit) {
+        super((base, options, closure)=>{
+            if (!jet.isRunnable(onInit)) { return closure(true); }
+            try { onInit(base, options); } catch (e) { return closure(false, e); }
+            return closure(true);
+        });
+    }
+
     is(path, value) {
-        this.autoInit();
+        autoInit(this);
         return super.is(path, value);
     }
     isType(path, type, strict=true) {
-        this.autoInit();
+        autoInit(this);
         return super.isType(path, type, strict);
     }
     isFull(path) {
-        this.autoInit();
+        autoInit(this);
         return super.isFull(path);
     }
     get(path, def) {
-        this.autoInit();
+        autoInit(this, true);
         return super.get(path, def);
     }
     getType(path, strict=true) {
-        this.autoInit();
+        autoInit(this);
         return super.getType(path, strict);
     }
     set(path, value) {
-        this.autoInit();
+        autoInit(this);
         return super.set(path, value);
     }
     remove(path) {
-        this.autoInit();
+        autoInit(this);
         return super.remove(path);
     }
     pull(path) {
-        this.autoInit();
+        autoInit(this);
         return super.pull(path);
     }
     watch(path, fce, initRun=false) {
-        this.autoInit();
+        autoInit(this, true);
         return super.watch(path, fce, initRun);
     }
     fit(path, fce) {
-        this.autoInit();
+        autoInit(this);
         return super.fit(path, fce);
     }
     fitTo(path, type, ...args) {
-        this.autoInit();
+        autoInit(this);
         return super.fitTo(path, type, ...args);
     }
     fitType(path, type, strict=true) {
-        this.autoInit();
+        autoInit(this);
         return super.fitType(path, type, strict);
     }
     setDefault(path, value, fullDetect=true) {
-        this.autoInit();
+        autoInit(this);
         return super.setDefault(path, value, fullDetect);
     }
     setLock(path, value) {
-        this.autoInit();
+        autoInit(this);
         return super.setLock(path, value);
     }
 }
