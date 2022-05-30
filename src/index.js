@@ -1,7 +1,3 @@
-import BaseSync from "./BaseSync.js";
-import BaseAsync from "./BaseAsync.js";
+import Base from "./Base.js";
 
-
-
-export default { BaseSync, BaseAsync }
-export { BaseSync, BaseAsync }
+export default Base;

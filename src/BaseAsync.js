@@ -1,5 +1,5 @@
 import Base from "./Base.js";
-import { autoInit } from "./defs.js";
+import { autoInit } from "./private";
 
 class BaseAsync extends Base {
 
@@ -16,19 +16,19 @@ class BaseAsync extends Base {
         return super.is(path, value);
     }
     async isType(path, type, strict=true) {
-        await autoInit(this, true);
+        await autoInit(this);
         return super.isType(path, type, strict);
     }
     async isFull(path) {
-        await autoInit(this, true);
+        await autoInit(this);
         return super.isFull(path);
     }
     async get(path, def) {
-        await autoInit(this, true);
+        await autoInit(this);
         return super.get(path, def);
     }
     async getType(path, strict=true) {
-        await autoInit(this, true);
+        await autoInit(this);
         return super.getType(path, strict);
     }
     async set(path, value) {
@@ -44,7 +44,7 @@ class BaseAsync extends Base {
         return super.pull(path);
     }
     async watch(path, fce, initRun=false) {
-        await autoInit(this, true);
+        await autoInit(this);
         return super.watch(path, fce, initRun);
     }
     async fit(path, fce) {

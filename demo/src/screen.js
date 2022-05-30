@@ -1,5 +1,5 @@
 import jet from "@randajan/jet-core";
-import { BaseAsync } from "../../dist/index.js";
+import Base from "../../dist/index.js";
 
 const def = {
     width:[600, 960, 1280, 1920],
@@ -9,7 +9,7 @@ const def = {
 class Screen extends BaseAsync {
 
     constructor() {
-        super(async (options, closure)=>{
+        super(async (options)=>{
             const { widths, heights } = Object.jet.to(options);
     
             const check = {
@@ -27,8 +27,6 @@ class Screen extends BaseAsync {
                 }
                 return r;
             });
-    
-            return closure();
         });
 
         Object.defineProperties(this, {

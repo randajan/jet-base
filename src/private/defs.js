@@ -1,6 +1,6 @@
 
 const LIST = new Map();
-const states = ["error", "pending", "initializing", "ready"];
+export const statuses = ["pending", "loading", "saving", "ready", "error"];
 
 export const use = base=>LIST.get(base);
 
@@ -9,23 +9,24 @@ export const register = (base)=>{
     const priv = {
         paths:new Set(),
         flat:{},
+        seeds:{},
+        states:{},
         fits:{},
         watches:{},
-        stateCode:1, 
+        statusCode:0, 
         debug:false,
     };
 
-    Object.defineProperty(priv, "state", {get:_=>states[priv.stateCode]});
+    Object.defineProperty(priv, "status", {get:_=>statuses[priv.statusCode]});
 
     LIST.set(base, priv);
-
     return priv;
 }
 
 export const config = (base, options)=>{
     const _p = use(base);
 
-    if (_p.stateCode !== 1) { base.throw("config", `state must be '${states[1]}' insted of ${_p.state}`) }
+    if (_p.statusCode !== 0) { base.throw("config", `status must be '${statuses[0]}' insted of ${_p.status}`) }
     if (_p.optionsSet) { base.throw("config", "can be called just once"); }
 
     _p.optionsSet = true;
@@ -37,14 +38,14 @@ export const config = (base, options)=>{
 export const init = (base, options)=>{
     const _p = use(base);
 
-    if (_p.stateCode !== 1) { base.throw("init", `state must be '${states[1]}' insted of '${_p.state}'`); }
+    if (_p.statusCode !== 0) { base.throw("init", `status must be '${statuses[0]}' insted of '${_p.status}'`); }
     if (_p.optionsSet && options) { base.throw("init", "options was predefined with config()"); }
 
-    _p.stateCode = 2;
+    _p.statusCode = 1;
 
     const closure = (isReady, error)=>{
-        if (isReady) { _p.stateCode = 3 } else {
-            _p.stateCode = 0;
+        if (isReady) { _p.statusCode = 3 } else {
+            _p.statusCode = 4;
             _p.error = error || new Error("Unknown error");
             base.throw("init", _p.error);
         }
@@ -54,11 +55,9 @@ export const init = (base, options)=>{
     return _p.initialization = _p.onInit(_p.options = Object.jet.to(options || _p.options), closure);
 }
 
-
-
 export const autoInit = (base)=>{
-    if (base.stateCode === 3) { return; }
-    if (base.stateCode === 0) { base.throw("", use(base).error); }
-    if (base.stateCode === 2) { return use(base).initialization; }
-    if (base.stateCode === 1) { return init(base); }
+    if (base.statusCode === 3) { return; }
+    if (base.statusCode === 4) { base.throw("", use(base).error); }
+    if (base.statusCode === 1) { return use(base).initialization; }
+    if (base.statusCode === 0) { return init(base); }
 }

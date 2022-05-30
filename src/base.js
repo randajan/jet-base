@@ -1,18 +1,16 @@
 
 import jet from "@randajan/jet-core";
-import { use, register, config, init } from "./defs.js";
-import { addWatch, addFit } from "./duty.js";
-import * as _ from "./vals.js";
+import * as _ from "./private";
 
 class Base {
 
     constructor(onInit) {
-        const _p = register(this);
+        const _p = _.register(this);
 
         const props = {
             error:{enumerable:true, get:_=>_p.error},
-            state:{enumerable:true, get:_=>_p.state},
-            stateCode:{enumerable:true, get:_=>_p.stateCode},
+            status:{enumerable:true, get:()=>_.statuses[_p.statusCode]},
+            statusCode:{enumerable:true, get:_=>_p.statusCode},
             debug:{enumerable:true, get:_=>_p.debug, set:v=>_p.debug = Boolean.jet.to(debug)},
         }
 
@@ -35,8 +33,13 @@ class Base {
         throw `jet-base${method ? ` ${method}(...)` : ""}${path ? ` path '${path}'` : ""} ${msg}`;
     }
 
-    config(options) { return config(this, options); }
-    init(options) { return init(this, options); }
+    config(options) { return _.config(this, options); }
+    init(options) { return _.init(this, options); }
+
+    //seed(path, fce) { return _.seed(this, path, fce); }
+
+    state(path) { return _.states[_.getStateCode(this, path)]; }
+    stateCode(path) { return _.getStateCode(this, path); }
 
     is(path, value) { return _.get(this, path) === value; }
     isType(path, type, strict=true) { return jet.is(type, _.get(this, path), strict); }
@@ -60,23 +63,23 @@ class Base {
         return v != null ? jet.copy(v, true) : def;
     }
     
-    watch(path, fce, initRun=false) { return addWatch(this, path, fce, initRun); }
+    watch(path, fce, initRun=false) { return _.addWatch(this, path, fce, initRun); }
 
-    fit(path, fce) { return addFit(this, path, fce); }
+    fit(path, fce) { return _.addFit(this, path, fce); }
 
-    fitTo(path, type, ...args) { return addFit(this, path, (next, v, f)=>jet.to(type, next(v, f), ...args)); }
-    fitType(path, type, strict=true) { return addFit(this, path, (next, v, f)=>{
+    fitTo(path, type, ...args) { return _.addFit(this, path, (next, v, f)=>jet.to(type, next(v, f), ...args)); }
+    fitType(path, type, strict=true) { return _.addFit(this, path, (next, v, f)=>{
         v = next(v, f);
         return jet.is(type, v, strict) ? v : jet.create(type);
     }); }
 
     setDefault(path, value, fullDetect=true) {
         const isFull = fullDetect ? jet.isFull : v=>v!=null;
-        return addFit(this, path, (next, v, f)=>isFull(next(v, f)) ? v : value );
+        return _.addFit(this, path, (next, v, f)=>isFull(next(v, f)) ? v : value );
     }
     setLock(path, value) {
         if (value === undefined) { value = _.get(this, path); }
-        return addFit(this, path, _=>value);
+        return _.addFit(this, path, _=>value);
     }
 }
 
