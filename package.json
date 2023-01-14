@@ -1,6 +1,6 @@
 {
   "name": "@randajan/jet-base",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Ecosystem of types and related usefull tools.",
   "repository": "randajan/jet-base",
   "type": "module",
