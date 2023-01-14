@@ -1,5 +1,5 @@
 import Base from "./Base.js";
-import { autoInit } from "./private";
+import { autoInit } from "../private";
 
 class BaseAsync extends Base {
 
@@ -39,9 +39,9 @@ class BaseAsync extends Base {
         await autoInit(this);
         return super.remove(path);
     }
-    async pull(path) {
+    async pull(path, def) {
         await autoInit(this);
-        return super.pull(path);
+        return super.pull(path, def);
     }
     async watch(path, fce, initRun=false) {
         await autoInit(this);

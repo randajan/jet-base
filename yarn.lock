@@ -2,15 +2,15 @@
 # yarn lockfile v1
 
 
-"@randajan/jet-core@^3.0.8":
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/@randajan/jet-core/-/jet-core-3.0.8.tgz#d404b890e085dda1313f8d87a75550ed7a576662"
-  integrity sha512-Cxtz6qvXTzA4M7ZslKqhrmHYbRTrb4ZZIdyseD4OAnFsGSd72PcGiBUfKmtJNNUBiBetaQ2VVxBfPFMfQm2B6g==
+"@randajan/jet-core@^3.0.11":
+  version "3.0.11"
+  resolved "https://registry.yarnpkg.com/@randajan/jet-core/-/jet-core-3.0.11.tgz#664a645a1085b00ce5789ea77c50773d5cbe9519"
+  integrity sha512-MNhYDtd40kXvV80fx6fNmY7QKB9Eo18cNxUBeXZ3kY1QFvZzroVqBfZLtdQ9KA/vIV8VDcOWhYhsNmg06uDZIw==
 
-"@randajan/simple-lib@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@randajan/simple-lib/-/simple-lib-1.2.1.tgz#f136426ec4e625b043873ae9c5a615d22634a5c0"
-  integrity sha512-zPgAU+d631DoQ+2k+GA7QWGvHu8x6qr/qsOFxqN9UxG676dPbLUaKtiVmY+2ErlfUe6oNbiEEnWOVqeJS9GA4w==
+"@randajan/simple-lib@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@randajan/simple-lib/-/simple-lib-2.0.0.tgz#ea5a116847cb5340d42e3cc76f0f433a9c52023d"
+  integrity sha512-ZhADTAjdu53yLBnLQ4o2ePJe2mfVSp8TS7rMCgC4iRNpcLe8dM+jS1Rlm0f/DN/exebepkyRALLQgG7/hkeQ2w==
   dependencies:
     chokidar "^3.5.3"
     esbuild "^0.14.36"

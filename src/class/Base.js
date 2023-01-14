@@ -1,6 +1,6 @@
 
 import jet from "@randajan/jet-core";
-import * as _ from "./private";
+import * as _ from "../private";
 
 class Base {
 
@@ -57,7 +57,7 @@ class Base {
     }
 
     remove(path) { return _.set(this, path); }
-    pull(path) {
+    pull(path, def) {
         const v = _.get(this, path);
         _.set(this, path);
         return v != null ? jet.copy(v, true) : def;

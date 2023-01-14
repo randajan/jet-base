@@ -1,15 +1,15 @@
 import jet from "@randajan/jet-core";
-import Base from "../../dist/index.js";
+import BaseSync from "../../dist/sync";
 
 const def = {
     width:[600, 960, 1280, 1920],
     height:[300, 600, 920, 1280]
 }
 
-class Screen extends BaseAsync {
+class Screen extends Base {
 
     constructor() {
-        super(async (options)=>{
+        super(options=>{
             const { widths, heights } = Object.jet.to(options);
     
             const check = {
@@ -19,7 +19,7 @@ class Screen extends BaseAsync {
     
             window.addEventListener("resize", _=>this.set());
     
-            await this.fit(_=>{
+            this.fit(_=>{
                 const r = {};
                 for (let k in check) {
                     const d = check[k], v = this[k];

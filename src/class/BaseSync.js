@@ -1,11 +1,11 @@
 import Base from "./Base.js";
-import { autoInit } from "./private";
+import { autoInit } from "../private";
 
 class BaseSync extends Base {
 
     constructor(onInit) {
         super((base, options, closure)=>{
-            if (!jet.isRunnable(onInit)) { return (true); }
+            if (!jet.isRunnable(onInit)) { return closure(true); }
             try { onInit(base, options); } catch (e) { return closure(false, e); }
             return closure(true);
         });
@@ -39,9 +39,9 @@ class BaseSync extends Base {
         autoInit(this);
         return super.remove(path);
     }
-    pull(path) {
+    pull(path, def) {
         autoInit(this);
-        return super.pull(path);
+        return super.pull(path, def);
     }
     watch(path, fce, initRun=false) {
         autoInit(this);

@@ -7,7 +7,9 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/index.js",
+    "./sync":"./dist/symc.js",
+    "./async":"./dist/async.js"
   },
   "scripts": {
     "start": "set NODE_ENV=dev&& node ./index.js",
@@ -15,10 +17,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@randajan/simple-lib": "^1.2.1"
+    "@randajan/simple-lib": "^2.0.0"
   },
   "peerDependencies": {
-    "@randajan/jet-core": "^3.0.8"
+    "@randajan/jet-core": "^3.0.11"
   },
   "files": [
     "dist",
