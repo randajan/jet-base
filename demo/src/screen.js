@@ -1,25 +1,24 @@
-import jet from "@randajan/jet-core";
 import BaseSync from "../../dist/sync";
 
-const def = {
+const _def = {
     width:[600, 960, 1280, 1920],
     height:[300, 600, 920, 1280]
 }
 
-class Screen extends Base {
+class Screen extends BaseSync {
 
     constructor() {
-        super(options=>{
-            const { widths, heights } = Object.jet.to(options);
+
+        super((base, { widths, heights })=>{
     
             const check = {
-                width:Array.jet.tap(widths, def.width).sort((a,b)=>a-b),
-                height:Array.jet.tap(heights, def.height).sort((a,b)=>a-b)
+                width:Array.jet.tap(widths, _def.width).sort((a,b)=>a-b),
+                height:Array.jet.tap(heights, _def.height).sort((a,b)=>a-b)
             }    
     
-            window.addEventListener("resize", _=>this.set());
+            window.addEventListener("resize", _=>base.set());
     
-            this.fit(_=>{
+            base.fit(_=>{
                 const r = {};
                 for (let k in check) {
                     const d = check[k], v = this[k];
@@ -33,6 +32,15 @@ class Screen extends Base {
             width:{get:_=>Math.max(document.documentElement.clientWidth, window.innerWidth)},
             height:{get:_=>Math.max(document.documentElement.clientHeight, window.innerHeight)}
         });
+    }
+
+    getList() {
+        const result = [];
+        const index = this.get();
+        for (const i in index) {
+            if(index[i]) { result.push(i); }
+        }
+        return result;
     }
 
 }

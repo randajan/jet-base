@@ -8,7 +8,7 @@
   "module": "dist/index.js",
   "exports": {
     ".": "./dist/index.js",
-    "./sync": "./dist/symc.js",
+    "./sync": "./dist/sync.js",
     "./async": "./dist/async.js"
   },
   "scripts": {
