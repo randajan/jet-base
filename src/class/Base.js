@@ -11,7 +11,7 @@ class Base {
             error:{enumerable:true, get:_=>_p.error},
             status:{enumerable:true, get:()=>_.statuses[_p.statusCode]},
             statusCode:{enumerable:true, get:_=>_p.statusCode},
-            debug:{enumerable:true, get:_=>_p.debug, set:v=>_p.debug = Boolean.jet.to(debug)},
+            debug:{enumerable:true, get:_=>_p.debug, set:debug=>_p.debug = Boolean.jet.to(debug)},
         }
 
         Object.defineProperties(this, props);
