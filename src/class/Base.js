@@ -81,6 +81,10 @@ class Base {
         if (value === undefined) { value = _.get(this, path); }
         return _.addFit(this, path, _=>value);
     }
+
+    sugar(path) {
+        return _.addSugar(this, path);
+    }
 }
 
 

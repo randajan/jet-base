@@ -1,3 +1,4 @@
+import { Sugar } from "../class/Sugar";
 
 const LIST = new Map();
 export const statuses = ["pending", "loading", "saving", "ready", "error"];
@@ -15,6 +16,7 @@ export const register = (base)=>{
         watches:{},
         statusCode:0, 
         debug:false,
+        sugars:{}
     };
 
     Object.defineProperty(priv, "status", {get:_=>statuses[priv.statusCode]});
@@ -60,4 +62,10 @@ export const autoInit = (base)=>{
     if (base.statusCode === 4) { base.throw("", use(base).error); }
     if (base.statusCode === 1) { return use(base).initialization; }
     if (base.statusCode === 0) { return init(base); }
+}
+
+export const addSugar = (base, path)=>{
+    const _p = use(base);
+    path = String.jet.to(path, ".");
+    return _p.sugars[path] || (_p.sugars[path] = new Sugar(base, path));
 }
