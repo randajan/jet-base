@@ -9,8 +9,11 @@ class Screen extends BaseSync {
 
     constructor() {
 
-        super((base, { widths, heights })=>{
-    
+        super((base, opt)=>{
+            const { widths, heights } = opt;
+
+            console.log(opt);
+
             const check = {
                 width:Array.jet.tap(widths, _def.width).sort((a,b)=>a-b),
                 height:Array.jet.tap(heights, _def.height).sort((a,b)=>a-b)

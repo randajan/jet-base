@@ -34,17 +34,18 @@ const deflate = (paths, path, value)=>{
     return flat;
 }
 
-const prepareParent = (key, parent, img, copy=false)=>{
+const prepareParent = (key, parent, img, copy=false, create=false)=>{
     if (parent) { return parent; }
-    if (!img || !jet.isMapable(img)) { return String.jet.isNumeric(key) ? [] : {} }
+    if (!img || !jet.isMapable(img)) { return !create ? undefined : String.jet.isNumeric(key) ? [] : {} }
     return copy ? jet.copy(img, true, false) : jet.create(jet(img, false));
 }
 
 const put = (path, value, parents, parentImgs, imgCopy=false)=>{
     const [p, d, k] = spread(path);
-    parents[d] = prepareParent(k, parents[d], parentImgs[d], imgCopy);
-    if (p) { jet.set(parents[d], k, value); }
-    parents[p] = value;
+    const nudf = value !== undefined;
+    parents[d] = prepareParent(k, parents[d], parentImgs[d], imgCopy, nudf);
+    if (p && parents[d]) { jet.set(parents[d], k, value); }
+    if (nudf) { parents[p] = value; } else { delete parents[p]; }
 }
 
 const fit = (fits, path, to, from)=>(fits[path] && fits[path].fit) ? fits[path].fit(to[path], from[path]) : to[path];
@@ -57,6 +58,7 @@ export const set = (base, path, value)=>{
     const flatIn = deflate(paths, path, value); //deflate input value
 
     const rawPaths = [...paths].sort();
+
     for (let i=rawPaths.length-1; i>=0; i--) { //fit changes
         const p = rawPaths[i];
         if (path === p) {// SET

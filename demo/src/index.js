@@ -6,6 +6,10 @@ import screen from "./screen.js";
 window.jet = jet;
 
 
+screen.config({
+    width:[400, 600, 960, 1280, 1920],
+    height:[300, 600, 920, 1280]
+});
 
 window.baseScreen = screen;
 
