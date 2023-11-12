@@ -50,6 +50,13 @@ const put = (path, value, parents, parentImgs, imgCopy=false)=>{
 
 const fit = (fits, path, to, from)=>(fits[path] && fits[path].fit) ? fits[path].fit(to[path], from[path]) : to[path];
 
+const pathStartsWith = (path, startsWith)=>{
+    if (startsWith == null || startsWith === "") { return true; }
+    if (!path.startsWith(startsWith)) { return false; }
+    const endChr = path[startsWith.length];
+    return endChr == null || endChr === ".";
+}
+
 export const set = (base, path, value)=>{
     const _p = use(base), { input, flat, fits, paths, watches } = _p;
 
@@ -65,11 +72,11 @@ export const set = (base, path, value)=>{
             //console.log(p, "set");
             put(p, fit(fits, p, flatIn, flat), flatIn, flat, true);
         } 
-        else if (path.startsWith(p) && path[p.length] === ".") {// MERGE
+        else if (pathStartsWith(path, p)) {// MERGE
             //console.log(p, "merge");
             put(p, fit(fits, p, flatIn, flat), flatIn, flat, true);
         } 
-        else if (p.startsWith(path) && p[path.length] === ".") {// OVERWRITE
+        else if (pathStartsWith(p, path)) {// OVERWRITE
             //console.log(p, "overwrite");
             put(p, fit(fits, p, flatIn, flat), flatIn, flatIn);
         }
