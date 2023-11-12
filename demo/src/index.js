@@ -1,5 +1,6 @@
 import jet from "@randajan/jet-core";
 import BaseAsync from "../../dist/async";
+import BaseSync from "../../dist/sync";
 import screen from "./screen.js";
 
 
@@ -13,7 +14,7 @@ screen.config({
 
 window.baseScreen = screen;
 
-window.base = new BaseAsync(async (base, options)=>{
+window.baseA = new BaseAsync(async (base, options)=>{
     await new Promise((res, rej)=>{
         setTimeout(_=>{
             base.set({test:"test"});
@@ -23,4 +24,6 @@ window.base = new BaseAsync(async (base, options)=>{
     
 });
 
+
+window.base = new BaseSync();
 

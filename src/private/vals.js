@@ -65,11 +65,11 @@ export const set = (base, path, value)=>{
             //console.log(p, "set");
             put(p, fit(fits, p, flatIn, flat), flatIn, flat, true);
         } 
-        else if (path.startsWith(p)) {// MERGE
+        else if (path.startsWith(p) && path[p.length] === ".") {// MERGE
             //console.log(p, "merge");
             put(p, fit(fits, p, flatIn, flat), flatIn, flat, true);
         } 
-        else if (p.startsWith(path)) {// OVERWRITE
+        else if (p.startsWith(path) && p[path.length] === ".") {// OVERWRITE
             //console.log(p, "overwrite");
             put(p, fit(fits, p, flatIn, flat), flatIn, flatIn);
         }
