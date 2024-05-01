@@ -66,6 +66,6 @@ export const autoInit = (base)=>{
 
 export const addSugar = (base, path)=>{
     const _p = use(base);
-    path = String.jet.to(path, ".");
+    path = jet.dot.toString(path);
     return _p.sugars[path] || (_p.sugars[path] = new Sugar(base, path));
 }

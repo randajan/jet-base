@@ -1,16 +1,18 @@
 import jet from "@randajan/jet-core";
+import RunPool from "@randajan/jet-core/runpool";
 
 import { use } from "./defs.js";
 import { set } from "./vals.js";
 
+
 const formatDutyArgs = (path, fce)=>{
     if (fce === undefined && jet.isRunnable(path)) { fce = path; path = ""; }
-    else { path = String.jet.to(path, "."); }
+    else { path = jet.dot.toString(path); }
 
     return [path, fce]
 }
 
-const addDuty = (priv, kind, path, fce)=>(priv[kind][path] = (priv[kind][path] || jet.create.RunPool())).add(fce);
+const addDuty = (priv, kind, path, fce)=>(priv[kind][path] = (priv[kind][path] || new RunPool())).add(fce);
 
 const filterChanges = (path, changes)=>{
     if (!path) { return [...changes]; }
@@ -23,7 +25,7 @@ const filterChanges = (path, changes)=>{
 
 export const addWatch = (base, path, fce, initRun=false)=>{
     [path, fce] = formatDutyArgs(path, fce);
-    const get = p=>base.get([path, p]);
+    const get = p=>base.get(jet.dot.glue(path, jet.dot.toString(p)));
     if (initRun) { setTimeout(_=>fce(get, _=>[])); }
     return addDuty(use(base), "watches", path, cngs=>{ fce(get, _=>filterChanges(path, cngs)); });
 }

@@ -1,7 +1,7 @@
-import slib from "@randajan/simple-lib";
+import slib, { argv } from "@randajan/simple-lib";
 
 slib(
-    process.env.NODE_ENV !== "dev",
+    argv.isBuild,
     {
         port:4005,
         lib:{

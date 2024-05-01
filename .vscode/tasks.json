@@ -28,13 +28,13 @@
             "type": "shell",
             "command": "git add .; git commit -m '${input:commit}'; git push -u origin main",
             "dependsOn": [
-                "yarn build"
+                "Build package"
             ]
         },
         {
-            "label": "yarn build",
+            "label": "Build package",
             "type": "shell",
-            "command": "yarn build",
+            "command": "node index isBuild=true",
         }
     ],
     "inputs": [

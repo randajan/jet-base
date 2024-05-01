@@ -17,10 +17,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@randajan/simple-lib": "^2.1.3"
+    "@randajan/simple-lib": "^2.3.1"
   },
   "peerDependencies": {
-    "@randajan/jet-core": "^3.2.17"
+    "@randajan/jet-core": "^4.0.6"
   },
   "files": [
     "dist",
