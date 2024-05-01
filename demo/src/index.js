@@ -1,4 +1,5 @@
 import jet from "@randajan/jet-core";
+import { each } from "@randajan/jet-core/eachSync";
 import BaseAsync from "../../dist/async";
 import BaseSync from "../../dist/sync";
 import screen from "./screen.js";
@@ -26,4 +27,3 @@ window.baseA = new BaseAsync(async (base, options)=>{
 
 
 window.base = new BaseSync();
-

@@ -37,7 +37,7 @@ const put = (path, value, parents, parentImgs, imgCopy=false)=>{
     let [k, d] = jet.dot.biteRight(path);
     const nudf = value !== undefined;
     parents[d] = prepareParent(k, parents[d], parentImgs[d], imgCopy, nudf);
-    if (path && parents[d]) { jet.set(parents[d], k, value); }
+    if (path && parents[d]) { jet.set(parents[d], jet.dot.unescape(k), value); }
     if (nudf) { parents[path] = value; } else { delete parents[path]; }
 }
 
@@ -75,11 +75,15 @@ export const set = (base, path, value)=>{
         }
     }
 
+    
+
     _p.input = path ? jet.digIn(input, path, value, true) : value;
     const output = _p.output = flatIn[""];
     const pathsOut = _p.paths = new Set();
     const flatOut = _p.flat = {"":output};
     const cngs = _p.changes = [];
+
+    
 
     pathsOut.add("");
     forEach(output, (v, p, isMapable)=>{ //detect updates

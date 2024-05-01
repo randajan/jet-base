@@ -20,7 +20,7 @@
     "@randajan/simple-lib": "^2.3.1"
   },
   "peerDependencies": {
-    "@randajan/jet-core": "^4.0.6"
+    "@randajan/jet-core": "^4.0.7"
   },
   "files": [
     "dist",

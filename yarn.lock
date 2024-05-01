@@ -112,10 +112,10 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.16.17.tgz#c5a1a4bfe1b57f0c3e61b29883525c6da3e5c091"
   integrity sha512-y+EHuSchhL7FjHgvQL/0fnnFmO4T1bhvWANX6gcnqTjtnKWbTvUMCpGnv2+t+31d7RzyEAYAd4u2fnIhHL6N/Q==
 
-"@randajan/jet-core@^4.0.6":
-  version "4.0.6"
-  resolved "https://registry.yarnpkg.com/@randajan/jet-core/-/jet-core-4.0.6.tgz#6b489160fde516024650a095a3a695c38fe4f61c"
-  integrity sha512-mKtaTW1GjZI3n+EzLCACjdS16J8Wg49usXuy0amUlucb6iWpJVGA26I3o4dAbFvUi9i134KbDspeiRJWj0b8kg==
+"@randajan/jet-core@^4.0.7":
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/@randajan/jet-core/-/jet-core-4.0.7.tgz#57a5150346db4f95dd86021f6a0119fc054595ec"
+  integrity sha512-gTFmu+0ivpBeo1HfFyNOWEHAo1FJErJmzXtoEp9Icxx0z2aF15Y217EDfFgO0o9pwnUepawniEyKc6XxhI8GVA==
 
 "@randajan/simple-lib@^2.3.1":
   version "2.3.1"
